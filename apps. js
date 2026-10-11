@@ -1,0 +1,42 @@
+// 1. Inicializar OneSignal en tu página web
+window.OneSignal = window.OneSignal || [];
+OneSignal.push(function() {
+  OneSignal.init({
+    appId: "TU_APP_ID_DE_ONESIGNAL", // <- AQUÍ PONDRÁS TU CÓDIGO MÁS ADELANTE
+    safari_web_id: "TU_SAFARI_ID_SI_USAS_IPHONE",
+    notifyButton: { enable: false },
+  });
+});
+
+// 2. Lógica para el botón "Permitir Alertas con Sonido"
+document.getElementById('btn-permiso').addEventListener('click', () => {
+    // Le pide permiso al celular para mostrar alertas y activar el sonido
+    OneSignal.showNativePrompt();
+});
+
+// 3. Lógica para el botón "Programar Alarma"
+document.getElementById('btn-programar').addEventListener('click', () => {
+    const inputTiempo = document.getElementById('fecha-hora').value;
+    
+    // Validar si el usuario seleccionó una hora
+    if (!inputTiempo) {
+        alert("Por favor, selecciona una fecha y hora válida.");
+        return;
+    }
+
+    const destinoMilisegundos = new Date(inputTiempo).getTime();
+    const ahoraMilisegundos = new Date().getTime();
+    const diferenciaSegundos = Math.floor((destinoMilisegundos - ahoraMilisegundos) / 1000);
+
+    // Validar que la hora no sea en el pasado
+    if (diferenciaSegundos <= 0) {
+        alert("Debes elegir una hora en el futuro.");
+        return;
+    }
+
+    // Calcular minutos para el mensaje informativo
+    const minutosRestantes = Math.floor(diferenciaSegundos / 60);
+    alert(`¡Alarma programada con éxito! Tu celular puede apagarse de pantalla. Sonará en ${minutosRestantes} minutos.`);
+    
+    console.log(`Alarma registrada para enviarse en ${diferenciaSegundos} segundos.`);
+});

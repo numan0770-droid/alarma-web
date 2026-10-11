@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarma Web Persistente</title>
+    <!-- Enlace al manifiesto para que se pueda instalar en el celular -->
+    <link rel="manifest" href="/manifest.json">
+    <!-- SDK de OneSignal -->
+    <script src="https://onesignal.com" async></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background: #121212; color: white; padding-top: 50px; }
+        .container { max-width: 400px; margin: 0 auto; background: #1e1e1e; padding: 20px; border-radius: 10px; }
+        input, button { width: 90%; padding: 12px; margin: 10px 0; border-radius: 5px; border: none; font-size: 16px; }
+        button { background: #00adb5; color: white; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>⏰ Mi Alarma Web</h2>
+        <p>Paso 1: Activa las alertas</p>
+        <button id="btn-permiso">Permitir Alertas con Sonido</button>
+        
+        <p>Paso 2: Programa tu recordatorio</p>
+        <input type="datetime-local" id="fecha-hora">
+        <button id="btn-programar">Programar Alarma</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
